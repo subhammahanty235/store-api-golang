@@ -101,7 +101,7 @@ func getAllItems() []primitive.M {
 
 // controllers
 
-func InsertOneMovie(w http.ResponseWriter, r *http.Request) {
+func InsertOneItem(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Allow-Control-Allow-Methods", "POST")
 

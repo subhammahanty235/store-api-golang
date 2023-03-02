@@ -9,7 +9,7 @@ func Router() *mux.Router {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/api/items", controllers.GetAllItems).Methods("GET")
-	router.HandleFunc("/api/insert", controllers.InsertOneMovie).Methods("POST")
+	router.HandleFunc("/api/insert", controllers.InsertOneItem).Methods("POST")
 
 	router.HandleFunc("/api/update/{id}", controllers.UpdateOneItem).Methods("PATCH")
 
