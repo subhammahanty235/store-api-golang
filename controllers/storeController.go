@@ -49,30 +49,30 @@ func insertNewItem(item model.Store) {
 	fmt.Println("Inserted new Item", inserted.InsertedID)
 }
 
-func updateOneItem(id string, newdata model.Store) {
-	movieId, _ := primitive.ObjectIDFromHex(id)
-
-	updatedData := make(map[string]interface{})
-
-	if newdata.ItemName != "" {
-		updatedData["itemname"] = newdata.ItemName
-	}
-	if newdata.Price > 0 {
-		updatedData["price"] = newdata.Price
-	}
-	if newdata.StockAvailable > 0 {
-		updatedData["stockavailable"] = newdata.StockAvailable
-	}
-
-	filter := bson.M{"_id": movieId}
-
-	update := bson.M{"$set": updatedData}
-	result, err := collection.UpdateOne(context.Background(), filter, update)
-
+func updateOneItem(id string, newData model.Store) {
+	objID, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("One item modified", result.ModifiedCount)
+
+	updateData := make(map[string]interface{})
+	if newData.ItemName != "" {
+		updateData["itemname"] = newData.ItemName
+	}
+	if newData.Price > 0 {
+		updateData["price"] = newData.Price
+	}
+	if newData.StockAvailable > 0 {
+		updateData["stockavailable"] = newData.StockAvailable
+	}
+
+	filter := bson.M{"_id": objID}
+	update := bson.M{"$set": updateData}
+	_, err = collection.UpdateOne(context.Background(), filter, update)
+	if err != nil {
+		log.Fatal(err)
+	}
+	// fmt.Println("One item modified", )
 
 }
 
